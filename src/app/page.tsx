@@ -1,14 +1,46 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import { styled } from "@pigment-css/react";
+
+const Link = styled.a`
+  background-color: #0070f3;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #0050d3;
+  }
+`;
+
+const Main = styled.main`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6rem;
+  min-height: 100vh;
+`;
+
+// Not written as Tagged-Template because of TS issue. We'll fix it soon.
+const Wrapper = styled.div({
+  [`.${Link}`]: {
+    backgroundColor: "#82f300",
+    color: "#726e6e",
+  },
+});
 
 export default function Home() {
   return (
-    <main className={styles.main}>
+    <Main>
       <div className={styles.description}>
-        <p>
+        <Link>
           Get started by editing&nbsp;
           <code className={styles.code}>src/app/page.tsx</code>
-        </p>
+        </Link>
         <div>
           <a
             href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
@@ -89,7 +121,11 @@ export default function Home() {
             Instantly deploy your Next.js site to a shareable URL with Vercel.
           </p>
         </a>
+        <Wrapper>
+          <p>Wrapped link with different bg color</p>
+          <Link>Wrapped Link</Link>
+        </Wrapper>
       </div>
-    </main>
+    </Main>
   );
 }
